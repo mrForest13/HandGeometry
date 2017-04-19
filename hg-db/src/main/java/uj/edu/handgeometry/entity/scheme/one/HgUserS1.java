@@ -13,14 +13,14 @@ public class HgUserS1 {
     @GeneratedValue
     private long id;
 
-    private String usernumber;
+    private Integer usernumber;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     private List<HandScheme1> geometry;
 
     public HgUserS1() {}
 
-    public HgUserS1(String usernumber) {
+    public HgUserS1(Integer usernumber) {
         this.usernumber = usernumber;
     }
 
@@ -32,11 +32,11 @@ public class HgUserS1 {
         this.id = id;
     }
 
-    public String getUsernumber() {
+    public Integer getUsernumber() {
         return usernumber;
     }
 
-    public void setUsernumber(String usernumber) {
+    public void setUsernumber(Integer usernumber) {
         this.usernumber = usernumber;
     }
 

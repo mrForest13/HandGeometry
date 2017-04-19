@@ -25,5 +25,6 @@ public interface Geometry {
     public Double  getRingWidthBot();
     public Double  getLittleWidthTop();
     public Double  getLittleWidthBot();
+    public double getPalmWidth();
 
 }

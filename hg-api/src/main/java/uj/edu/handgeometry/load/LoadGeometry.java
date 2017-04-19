@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Created by zaloguj on 08.04.2017.
+ * Created by mateusz ligeza on 08.04.2017.
  */
-public abstract class Load {
+public abstract class LoadGeometry {
 
     public abstract void load(String path) throws FingerException;
 

@@ -131,4 +131,9 @@ public class Hand implements Geometry {
     public Double getLittleWidthBot() {
         return widths.getLittleWidthBot().getDistance();
     }
+
+    @Override
+    public double getPalmWidth() {
+        return 0;
+    }
 }

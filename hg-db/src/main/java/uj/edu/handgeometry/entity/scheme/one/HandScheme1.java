@@ -1,7 +1,7 @@
 package uj.edu.handgeometry.entity.scheme.one;
 
 import uj.edu.handgeometry.Geometry;
-import uj.edu.handgeometry.HandInitialize;
+import uj.edu.handgeometry.classifier.vector.SvnVector;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by mateusz ligeza on 02.04.2017.
  */
 @Entity
-public class HandScheme1 implements HandInitialize {
+public class HandScheme1 implements SvnVector {
 
     @Id
     @GeneratedValue
@@ -37,24 +37,25 @@ public class HandScheme1 implements HandInitialize {
 
 
     public HandScheme1(Geometry g) {
-        indexRing = g.getIndexLenght()/g.getRingLenght();
-        indexLittle = g.getIndexLenght()/g.getLittleLenght();
-        indexMiddle = g.getIndexLenght()/g.getMiddleLenght();
-        indexThumb = g.getIndexLenght()/g.getThumbLenght();
-        indexRadius = g.getIndexLenght()/g.getRadius();
-        ringMiddle = g.getRingLenght()/g.getMiddleLenght();
-        ringLittle = g.getRingLenght()/g.getLittleLenght();
-        ringThumb = g.getRingLenght()/g.getThumbLenght();
-        ringRadius = g.getRingLenght()/g.getRadius();
-        middleLittle = g.getMiddleLenght()/g.getLittleLenght();
-        middleThumb = g.getMiddleLenght()/g.getThumbLenght();
-        middleRadius = g.getMiddleLenght()/g.getRadius();
-        littleThumb = g.getLittleLenght()/g.getThumbLenght();
-        littleRadius = g.getLittleLenght()/g.getRadius();
-        thumbRadius = g.getThumbLenght()/g.getRadius();
+        indexRing = g.getIndexLenght() / g.getRingLenght();
+        indexLittle = g.getIndexLenght() / g.getLittleLenght();
+        indexMiddle = g.getIndexLenght() / g.getMiddleLenght();
+        indexThumb = g.getIndexLenght() / g.getThumbLenght();
+        indexRadius = g.getIndexLenght() / g.getRadius();
+        ringMiddle = g.getRingLenght() / g.getMiddleLenght();
+        ringLittle = g.getRingLenght() / g.getLittleLenght();
+        ringThumb = g.getRingLenght() / g.getThumbLenght();
+        ringRadius = g.getRingLenght() / g.getRadius();
+        middleLittle = g.getMiddleLenght() / g.getLittleLenght();
+        middleThumb = g.getMiddleLenght() / g.getThumbLenght();
+        middleRadius = g.getMiddleLenght() / g.getRadius();
+        littleThumb = g.getLittleLenght() / g.getThumbLenght();
+        littleRadius = g.getLittleLenght() / g.getRadius();
+        thumbRadius = g.getThumbLenght() / g.getRadius();
     }
 
-    public HandScheme1() {}
+    public HandScheme1() {
+    }
 
     public long getId() {
         return id;
@@ -215,21 +216,28 @@ public class HandScheme1 implements HandInitialize {
     }
 
     @Override
-    public void Initialize(Geometry g) {
-        indexRing = g.getIndexLenght()/g.getRingLenght();
-        indexLittle = g.getIndexLenght()/g.getLittleLenght();
-        indexMiddle = g.getIndexLenght()/g.getMiddleLenght();
-        indexThumb = g.getIndexLenght()/g.getThumbLenght();
-        indexRadius = g.getIndexLenght()/g.getRadius();
-        ringMiddle = g.getRingLenght()/g.getMiddleLenght();
-        ringLittle = g.getRingLenght()/g.getLittleLenght();
-        ringThumb = g.getRingLenght()/g.getThumbLenght();
-        ringRadius = g.getRingLenght()/g.getRadius();
-        middleLittle = g.getMiddleLenght()/g.getLittleLenght();
-        middleThumb = g.getMiddleLenght()/g.getThumbLenght();
-        middleRadius = g.getMiddleLenght()/g.getRadius();
-        littleThumb = g.getLittleLenght()/g.getThumbLenght();
-        littleRadius = g.getLittleLenght()/g.getRadius();
-        thumbRadius = g.getThumbLenght()/g.getRadius();
+    public double[] getVector() {
+        return new double[]{
+                indexRing,
+                indexLittle,
+                indexMiddle,
+                indexThumb,
+                ringMiddle,
+                ringLittle,
+                ringThumb,
+                middleLittle,
+                middleThumb,
+                littleThumb,
+                indexRadius,
+                thumbRadius,
+                middleRadius,
+                littleRadius,
+                ringRadius,
+        };
+    }
+
+    @Override
+    public int getLabel() {
+        return user.getUsernumber();
     }
 }

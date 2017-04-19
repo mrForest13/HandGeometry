@@ -5,9 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Created by zaloguj on 16.04.2017.
+ * Created by mateusz ligeza on 16.04.2017.
  */
-@Entity
+//@Entity
 public class HandScheme2 {
 
     @Id

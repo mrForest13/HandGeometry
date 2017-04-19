@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by mateusz ligeza on 16.04.2017.
  */
-@Entity
+//@Entity
 public class HgUserS2 {
 
     @Id
