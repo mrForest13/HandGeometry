@@ -1,9 +1,6 @@
 package uj.edu.handgeometry.image;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
+import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
@@ -19,7 +16,12 @@ public class Contour {
 
     public static HandImage getFromBinaryImage(String filepath) {
 
-        Mat bin = Highgui.imread(filepath, 0);
+        Mat bin = Highgui.imread(filepath);
+
+        Imgproc.cvtColor(bin, bin, Imgproc.COLOR_RGB2GRAY);
+
+        Imgproc.threshold(bin,bin,62,90,Imgproc.THRESH_BINARY);
+
         ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 
         Imgproc.findContours(bin, contours, new Mat(), Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);

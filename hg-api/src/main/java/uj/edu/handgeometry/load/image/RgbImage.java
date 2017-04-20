@@ -7,13 +7,9 @@ import uj.edu.handgeometry.load.LoadGeometry;
  */
 public class RgbImage extends LoadGeometry {
 
-    @Override
-    public void load(String path) {
-
-    }
 
     @Override
-    public void loadAll(String path) {
+    public void loadAll() {
 
     }
 }

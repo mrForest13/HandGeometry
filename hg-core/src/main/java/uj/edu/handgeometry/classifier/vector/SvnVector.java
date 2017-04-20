@@ -7,4 +7,5 @@ public interface SvnVector {
 
     public double[] getVector();
     public int getLabel();
+    public int getNumber();
 }

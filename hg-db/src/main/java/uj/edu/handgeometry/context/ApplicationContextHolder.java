@@ -32,4 +32,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     public static GenericDao getDbService() {
         return getContext().getBean(GenericDao.class);
     }
+
+    public static Directory getDirectory() { return getContext().getBean(Directory.class); }
+
 }

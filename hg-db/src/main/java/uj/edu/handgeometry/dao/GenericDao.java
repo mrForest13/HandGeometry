@@ -1,7 +1,7 @@
 package uj.edu.handgeometry.dao;
 
 
-import uj.edu.handgeometry.entity.scheme.Table;
+import uj.edu.handgeometry.entity.scheme.user.HgUser;
 
 import java.util.List;
 
@@ -11,5 +11,6 @@ import java.util.List;
 public interface GenericDao {
 
     public <T> void insert(T o);
-    public <T> List<T> findAll(Table tablename);
+    public <T> List<T> findAll();
+    public HgUser findByName(int number);
 }

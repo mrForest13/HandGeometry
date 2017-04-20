@@ -10,14 +10,19 @@ import java.nio.file.Paths;
  */
 public abstract class LoadGeometry {
 
-    public abstract void load(String path) throws FingerException;
-
-    public abstract void loadAll(String path) throws FingerException;
+    public abstract void loadAll() throws FingerException;
 
     public String getUserNumber(String path) {
         Path p = Paths.get(path);
         String fileName = p.getFileName().toString();
 
         return fileName.substring(0,3);
+    }
+
+    public String getPhotoNumber(String path) {
+        Path p = Paths.get(path);
+        String fileName = p.getFileName().toString();
+
+        return fileName.substring(4,5);
     }
 }

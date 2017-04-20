@@ -1,6 +1,7 @@
 package uj.edu.handgeometry.classifier;
 
 
+import org.apache.log4j.Logger;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.ml.CvSVM;
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public abstract class SVN {
 
+    private final static Logger logger = Logger.getLogger(SVN.class);
+
     protected CvSVM cvSVM;
     protected Mat trainingDataMat;
     protected Mat labelsMat;
@@ -20,8 +23,10 @@ public abstract class SVN {
     public SVN(List<SvnVector> vectors) {
         cvSVM = new CvSVM();
 
-        Mat labelsMat = new Mat(vectors.size(), 1, CvType.CV_32FC1);
-        Mat trainingDataMat = new Mat(vectors.size(),
+        logger.info("Load vectors size: " + vectors.size());
+
+        labelsMat = new Mat(vectors.size(), 1, CvType.CV_32FC1);
+        trainingDataMat = new Mat(vectors.size(),
                 vectors.get(0).getVector().length, CvType.CV_32FC1);
 
         for (int i = 0; i < vectors.size(); i++) {
@@ -40,6 +45,10 @@ public abstract class SVN {
         Mat sampleMat = new Mat(1,v.length, CvType.CV_32FC1);
         sampleMat.put(0,0, v);
 
-        return cvSVM.predict(sampleMat);
+        float result = cvSVM.predict(sampleMat);
+
+        logger.info("Result for vector label " + vector.getLabel()+" is "+result);
+
+        return result;
     }
 }

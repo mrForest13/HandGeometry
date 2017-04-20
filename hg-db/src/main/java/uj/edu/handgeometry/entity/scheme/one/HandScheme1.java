@@ -2,6 +2,7 @@ package uj.edu.handgeometry.entity.scheme.one;
 
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
+import uj.edu.handgeometry.entity.scheme.user.HgUser;
 
 import javax.persistence.*;
 
@@ -31,9 +32,11 @@ public class HandScheme1 implements SvnVector {
     private double littleRadius;
     private double ringRadius;
 
+    private int photoNumber;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private HgUserS1 user;
+    private HgUser user;
 
 
     public HandScheme1(Geometry g) {
@@ -56,6 +59,12 @@ public class HandScheme1 implements SvnVector {
 
     public HandScheme1() {
     }
+
+    public void setPhotoNumber(int number) {
+        this.photoNumber = number;
+    }
+
+    public int getPhotoNumber() { return photoNumber; }
 
     public long getId() {
         return id;
@@ -185,11 +194,11 @@ public class HandScheme1 implements SvnVector {
         this.ringRadius = ringRadius;
     }
 
-    public HgUserS1 getUser() {
+    public HgUser getUser() {
         return user;
     }
 
-    public void setUser(HgUserS1 user) {
+    public void setUser(HgUser user) {
         this.user = user;
     }
 
@@ -238,6 +247,11 @@ public class HandScheme1 implements SvnVector {
 
     @Override
     public int getLabel() {
-        return user.getUsernumber();
+        return user.getUserNumber();
+    }
+
+    @Override
+    public int getNumber() {
+        return getPhotoNumber();
     }
 }

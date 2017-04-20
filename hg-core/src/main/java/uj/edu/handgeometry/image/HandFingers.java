@@ -21,6 +21,8 @@ public class HandFingers {
 
         if (points.size() < 5) throw new FingerException();
 
+        if(points.size()>5) points = getFive(points);
+
         return loadFingerTipsPoint(points, maxCircle);
     }
 
@@ -108,6 +110,19 @@ public class HandFingers {
         }
 
         return fingerTips;
+    }
+
+    private static List<Point> getFive(List<Point> points) {
+
+        Collections.sort(points, new Comparator<Point>() {
+
+                public int compare(Point o1, Point o2) {
+
+                    return o1.y > o2.y ? 1 : (o1.y < o2.y ? -1 : 0);
+                }
+        });
+
+        return points.subList(0,5);
     }
 
 }
