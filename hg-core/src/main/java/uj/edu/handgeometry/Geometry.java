@@ -25,7 +25,7 @@ public interface Geometry {
     public Double  getRingWidthBot();
     public Double  getLittleWidthTop();
     public Double  getLittleWidthBot();
-    public double getPalmWidth();
+    public Double getPalmWidth();
 
     public void draw(String filePath,String origin);
 

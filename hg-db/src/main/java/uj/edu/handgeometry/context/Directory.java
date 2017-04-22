@@ -17,4 +17,5 @@ public class Directory {
     @Autowired
     @Value("${test.directory.result}")
     public String resultDirectory;
+
 }

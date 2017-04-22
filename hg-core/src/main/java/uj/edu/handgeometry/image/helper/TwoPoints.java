@@ -1,6 +1,9 @@
 package uj.edu.handgeometry.image.helper;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 
 import java.util.List;
 
@@ -83,5 +86,9 @@ public class TwoPoints implements Comparable<TwoPoints> {
     public boolean equals(Object obj) {
         return ((TwoPoints)obj).getP1().equals(this.p1) ||
                 ((TwoPoints)obj).getP2().equals(this.p2) ? true : false;
+    }
+
+    public void draw(Mat mat) {
+        Core.line(mat,p1,p2,new Scalar(255, 0, 0));
     }
 }

@@ -5,16 +5,20 @@ import org.apache.log4j.Logger;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.ml.CvSVM;
+import uj.edu.handgeometry.classifier.properties.LoadXml;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.XMLFormatter;
 
 /**
  * Created by mateusz ligeza on 16.04.2017.
  */
 public abstract class SVN {
 
-    private final static Logger logger = Logger.getLogger(SVN.class);
+    protected final static Logger logger = Logger.getLogger(SVN.class);
 
     protected CvSVM cvSVM;
     protected Mat trainingDataMat;
@@ -38,17 +42,35 @@ public abstract class SVN {
 
     public abstract void train();
 
-    public float predict(SvnVector vector) {
+    public int predict(SvnVector vector) {
 
         double[] v = vector.getVector();
 
-        Mat sampleMat = new Mat(1,v.length, CvType.CV_32FC1);
-        sampleMat.put(0,0, v);
+        Mat sampleMat = new Mat(1, v.length, CvType.CV_32FC1);
+        sampleMat.put(0, 0, v);
 
         float result = cvSVM.predict(sampleMat);
 
-        logger.info("Result for vector label " + vector.getLabel()+" is "+result);
+        logger.info("Result for vector label " + vector.getLabel() + " is " + result);
 
-        return result;
+        return (int) result;
+    }
+
+    public void save() {
+        logger.info("Save new classifier in " + LoadXml.get());
+        cvSVM.save(LoadXml.get());
+    }
+
+
+    public void load() {
+        File f = new File(LoadXml.get());
+        if(f.exists()) {
+            logger.info("Load classifier from: " + LoadXml.get());
+            cvSVM.load(LoadXml.get());
+        } else {
+            logger.info("train new classifier");
+            train();
+            save();
+        }
     }
 }

@@ -2,8 +2,7 @@ package uj.edu.handgeometry.load.image;
 
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.context.ApplicationContextHolder;
-import uj.edu.handgeometry.context.Directory;
-import uj.edu.handgeometry.entity.scheme.one.HandScheme1;
+import uj.edu.handgeometry.entity.scheme.two.HandScheme2;
 import uj.edu.handgeometry.entity.scheme.user.HgUser;
 import uj.edu.handgeometry.exception.FingerException;
 import uj.edu.handgeometry.file.FileReader;
@@ -26,16 +25,16 @@ public class BinaryImage extends LoadGeometry {
         Geometry hand = new Hand(handImage);
         hand.init();
 
-        hand.draw(path.replaceAll("bin","testywynik"),path);
+        hand.draw(path.replaceAll("bin", "wynik"), path);
 
         String userName = getUserNumber(path);
 
         HgUser hgUser = ApplicationContextHolder.getDbService().findByName(Integer.parseInt(userName));
 
-        HandScheme1 hs = new HandScheme1(hand);
+        HandScheme2 hs = new HandScheme2(hand);
         hs.setPhotoNumber(Integer.parseInt(getPhotoNumber(path)));
 
-        if(hgUser==null) {
+        if (hgUser == null) {
             hgUser = new HgUser(Integer.parseInt(userName));
             ApplicationContextHolder.getDbService().insert(hgUser);
         }
@@ -51,7 +50,7 @@ public class BinaryImage extends LoadGeometry {
 
         List<String> fileNames = FileReader.getAll(directoryPath);
 
-        for(String name : fileNames) load(directoryPath + File.separator + name+".jpg");
+        for (String name : fileNames) load(directoryPath + File.separator + name + ".jpg");
 
     }
 }

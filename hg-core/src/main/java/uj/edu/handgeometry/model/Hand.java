@@ -6,10 +6,12 @@ import org.opencv.imgproc.Imgproc;
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.exception.FingerException;
 import uj.edu.handgeometry.image.*;
-import uj.edu.handgeometry.image.helper.HandHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static uj.edu.handgeometry.image.helper.HandHelper.distance;
+import static uj.edu.handgeometry.image.helper.HandHelper.lineCenter;
 
 /**
  * Created by mateusz ligeza on 11.03.2017.
@@ -19,7 +21,7 @@ public class Hand implements Geometry {
     private HandImage handImage;
     private MaxCircle maxCircle;
     private FingerTips fingerTips;
-    private PointsBetweenFingers pointsBetweenFingers;
+    private PointsBetweenFingers pBf;
     private Widths widths;
 
 
@@ -43,45 +45,46 @@ public class Hand implements Geometry {
         return fingerTips;
     }
 
-    public PointsBetweenFingers getPointsBetweenFingers() {
-        return pointsBetweenFingers;
+    public PointsBetweenFingers getpBf() {
+        return pBf;
     }
 
     public void init() throws FingerException {
         maxCircle = HandCircle.get(handImage);
         fingerTips = HandFingers.get(handImage, maxCircle);
-        pointsBetweenFingers = HandConcavePoints.get(fingerTips, handImage, maxCircle);
-        widths = HandWidths.get(fingerTips, pointsBetweenFingers, handImage);
+        pBf = ConvexityDefects.get(fingerTips,handImage);
+        //pBf = HandConcavePoints.get(fingerTips,handImage,maxCircle);
+        widths = HandWidths.get(fingerTips, pBf, handImage);
     }
 
     @Override
     public Double getLittleLenght() {
-        return HandHelper.distance(fingerTips.getLittleFinger(),
-                HandHelper.lineCenter(pointsBetweenFingers.getLittleRing(), pointsBetweenFingers.getLittleExternal()));
+        return distance(fingerTips.getLittleFinger(),
+                lineCenter(pBf.getLittleRing(), pBf.getLittleExternal()));
     }
 
     @Override
     public Double getThumbLenght() {
-        return HandHelper.distance(fingerTips.getThumb(),
-                HandHelper.lineCenter(pointsBetweenFingers.getThumbExternal(), pointsBetweenFingers.getThumbIndex()));
+        return distance(fingerTips.getThumb(),
+                lineCenter(pBf.getThumbExternal(), pBf.getThumbIndex()));
     }
 
     @Override
     public Double getRingLenght() {
-        return HandHelper.distance(fingerTips.getRingFinger(),
-                HandHelper.lineCenter(pointsBetweenFingers.getLittleRing(), pointsBetweenFingers.getRingMiddle()));
+        return distance(fingerTips.getRingFinger(),
+                lineCenter(pBf.getLittleRing(), pBf.getRingMiddle()));
     }
 
     @Override
     public Double getIndexLenght() {
-        return HandHelper.distance(fingerTips.getIndexFinger(),
-                HandHelper.lineCenter(pointsBetweenFingers.getIndexExternal(), pointsBetweenFingers.getIndexMiddle()));
+        return distance(fingerTips.getIndexFinger(),
+                lineCenter(pBf.getIndexExternal(), pBf.getIndexMiddle()));
     }
 
     @Override
     public Double getMiddleLenght() {
-        return HandHelper.distance(fingerTips.getMiddleFinger(),
-                HandHelper.lineCenter(pointsBetweenFingers.getIndexMiddle(), pointsBetweenFingers.getRingMiddle()));
+        return distance(fingerTips.getMiddleFinger(),
+                lineCenter(pBf.getIndexMiddle(), pBf.getRingMiddle()));
     }
 
     @Override
@@ -140,8 +143,11 @@ public class Hand implements Geometry {
     }
 
     @Override
-    public double getPalmWidth() {
-        return 0;
+    public Double getPalmWidth() {
+        return distance(pBf.getIndexExternal(), pBf.getIndexMiddle())
+                +distance(pBf.getIndexMiddle(), pBf.getRingMiddle())
+                +distance(pBf.getRingMiddle(), pBf.getLittleRing())
+                +distance(pBf.getLittleRing(), pBf.getLittleExternal());
     }
 
     @Override
@@ -167,14 +173,27 @@ public class Hand implements Geometry {
         Core.circle(mat, fingerTips.getRingFinger(), 15, s);
         Core.circle(mat, fingerTips.getMiddleFinger(), 15, s);
 
-        Core.circle(mat, pointsBetweenFingers.getLittleRing(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getRingMiddle(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getIndexMiddle(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getThumbIndex(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getLittleExternal(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getThumbExternal(), 15, s);
-        Core.circle(mat, pointsBetweenFingers.getIndexExternal(), 15, s);
+        Core.circle(mat, pBf.getLittleRing(), 15, s);
+        Core.circle(mat, pBf.getRingMiddle(), 15, s);
+        Core.circle(mat, pBf.getIndexMiddle(), 15, s);
+        Core.circle(mat, pBf.getThumbIndex(), 15, s);
+        Core.circle(mat, pBf.getLittleExternal(), 15, s);
+        Core.circle(mat, pBf.getThumbExternal(), 15, s);
+        Core.circle(mat, pBf.getIndexExternal(), 15, s);
+
+        widths.getThumbWidthTop().draw(mat);
+        widths.getThumbWidthBot().draw(mat);
+        widths.getMiddleWidthBot().draw(mat);
+        widths.getMiddleWidthTop().draw(mat);
+        widths.getIndexWidthTop().draw(mat);
+        widths.getIndexWidthBot().draw(mat);
+        widths.getRingWidthTop().draw(mat);
+        widths.getRingWidthBot().draw(mat);
+        widths.getLittleWidthTop().draw(mat);
+        widths.getLittleWidthBot().draw(mat);
 
         Highgui.imwrite(filePath, mat);
+
+
     }
 }

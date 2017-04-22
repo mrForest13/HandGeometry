@@ -25,6 +25,13 @@ public class HgLinearSvn extends SVN {
         params.set_kernel_type(CvSVM.LINEAR);
         params.set_term_crit(new TermCriteria(TermCriteria.MAX_ITER, 100, 1e-6));
 
+        long startTime = System.currentTimeMillis();
+
         cvSVM.train(trainingDataMat,labelsMat,new Mat(),new Mat(),params);
+
+        long endTime   = System.currentTimeMillis();
+        long totalTime = endTime - startTime;
+
+        logger.info("Learning time of the classifier: " + totalTime);
     }
 }

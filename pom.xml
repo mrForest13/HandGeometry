@@ -27,6 +27,7 @@
         <module>hg-core</module>
         <module>hg-rest</module>
         <module>hg-db</module>
+        <module>hg-test</module>
     </modules>
 
 

@@ -4,6 +4,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
+import uj.edu.handgeometry.classifier.vector.SvnVector;
 import uj.edu.handgeometry.functional.IncreaseIndex;
 import uj.edu.handgeometry.functional.IndexChange;
 import uj.edu.handgeometry.functional.ReduceIndex;
@@ -21,14 +22,9 @@ public class HandHelper {
 
     public static Map<Point, Double> getDistance(List<Point> points, MaxCircle maxCircle) {
 
-        long startTime = System.currentTimeMillis();
-
         Map<Point, Double> pointsDistance = new LinkedHashMap<Point, Double>();
 
         points.forEach(p -> pointsDistance.put(p, distance(p, maxCircle.getCenter())));
-
-        long endTime   = System.currentTimeMillis();
-        long totalTime = endTime - startTime;
 
         return pointsDistance;
     }
