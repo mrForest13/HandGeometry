@@ -6,8 +6,7 @@ import uj.edu.handgeometry.entity.scheme.two.HandScheme2;
 import uj.edu.handgeometry.entity.scheme.user.HgUser;
 import uj.edu.handgeometry.exception.FingerException;
 import uj.edu.handgeometry.file.FileReader;
-import uj.edu.handgeometry.image.Contour;
-import uj.edu.handgeometry.image.HandImage;
+import uj.edu.handgeometry.image.*;
 import uj.edu.handgeometry.load.LoadGeometry;
 import uj.edu.handgeometry.model.Hand;
 
@@ -22,8 +21,8 @@ public class BinaryImage extends LoadGeometry {
 
     public void load(String path) throws FingerException {
         HandImage handImage = Contour.getFromBinaryImage(path);
-        Geometry hand = new Hand(handImage);
-        hand.init();
+        Geometry hand = new Hand(handImage,new HandCircle(),new HandFingers(),
+                new ConvexityDefects(),new HandWidths());
 
         hand.draw(path.replaceAll("bin", "wynik"), path);
 

@@ -5,7 +5,11 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.exception.FingerException;
+import uj.edu.handgeometry.initialization.CircleInitialization;
 import uj.edu.handgeometry.image.*;
+import uj.edu.handgeometry.initialization.DefectsInitialization;
+import uj.edu.handgeometry.initialization.FingersInitialization;
+import uj.edu.handgeometry.initialization.WidthsInitialization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +29,13 @@ public class Hand implements Geometry {
     private Widths widths;
 
 
-    public Hand(HandImage handImage) {
+    public Hand(HandImage handImage, CircleInitialization handCircle, FingersInitialization handFingers,
+                DefectsInitialization convexityDefects, WidthsInitialization handWidths) throws FingerException {
         this.handImage = handImage;
+        this.maxCircle = handCircle.get(handImage);
+        this.fingerTips = handFingers.get(handImage,maxCircle);
+        this.pBf = convexityDefects.get(fingerTips,handImage);
+        this.widths = handWidths.get(fingerTips,pBf,handImage);
     }
 
     public Widths getWidths() {
@@ -47,14 +56,6 @@ public class Hand implements Geometry {
 
     public PointsBetweenFingers getpBf() {
         return pBf;
-    }
-
-    public void init() throws FingerException {
-        maxCircle = HandCircle.get(handImage);
-        fingerTips = HandFingers.get(handImage, maxCircle);
-        pBf = ConvexityDefects.get(fingerTips,handImage);
-        //pBf = HandConcavePoints.get(fingerTips,handImage,maxCircle);
-        widths = HandWidths.get(fingerTips, pBf, handImage);
     }
 
     @Override

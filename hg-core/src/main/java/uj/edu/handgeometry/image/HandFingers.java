@@ -4,6 +4,7 @@ import org.opencv.core.Point;
 import uj.edu.handgeometry.exception.FingerException;
 import uj.edu.handgeometry.image.helper.HandHelper;
 import uj.edu.handgeometry.image.helper.TwoPoints;
+import uj.edu.handgeometry.initialization.FingersInitialization;
 import uj.edu.handgeometry.model.FingerTips;
 import uj.edu.handgeometry.model.MaxCircle;
 
@@ -13,9 +14,10 @@ import java.util.stream.Collectors;
 /**
  * Created by mateusz ligeza on 11.03.2017.
  */
-public class HandFingers {
+public class HandFingers implements FingersInitialization {
 
-    public static FingerTips get(HandImage handImage, MaxCircle maxCircle) throws FingerException {
+    @Override
+    public FingerTips get(HandImage handImage, MaxCircle maxCircle) throws FingerException {
 
         List<Point> points = getFingerPoints(handImage, maxCircle);
 
@@ -26,7 +28,7 @@ public class HandFingers {
         return loadFingerTipsPoint(points, maxCircle);
     }
 
-    private static List<Point> getFingerPoints(HandImage handImage, MaxCircle maxCircle) {
+    private List<Point> getFingerPoints(HandImage handImage, MaxCircle maxCircle) {
 
         ArrayList<Point> fingersPoint = new ArrayList<Point>();
 
@@ -67,7 +69,7 @@ public class HandFingers {
         return fingersPoint;
     }
 
-    private static FingerTips loadFingerTipsPoint(List<Point> points, MaxCircle maxCircle) {
+    private FingerTips loadFingerTipsPoint(List<Point> points, MaxCircle maxCircle) {
 
         FingerTips fingerTips = new FingerTips();
 
@@ -112,7 +114,7 @@ public class HandFingers {
         return fingerTips;
     }
 
-    private static List<Point> getFive(List<Point> points) {
+    private List<Point> getFive(List<Point> points) {
 
         Collections.sort(points, new Comparator<Point>() {
 

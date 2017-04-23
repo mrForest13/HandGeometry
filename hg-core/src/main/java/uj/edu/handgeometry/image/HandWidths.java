@@ -5,6 +5,7 @@ import uj.edu.handgeometry.functional.IncreaseIndex;
 import uj.edu.handgeometry.functional.ReduceIndex;
 import uj.edu.handgeometry.image.helper.HandHelper;
 import uj.edu.handgeometry.image.helper.TwoPoints;
+import uj.edu.handgeometry.initialization.WidthsInitialization;
 import uj.edu.handgeometry.model.FingerTips;
 import uj.edu.handgeometry.model.PointsBetweenFingers;
 import uj.edu.handgeometry.model.Widths;
@@ -15,9 +16,10 @@ import java.util.List;
 /**
  * Created by mateusz ligeza on 16.04.2017.
  */
-public class HandWidths {
+public class HandWidths implements WidthsInitialization {
 
-    public static Widths get(FingerTips fingerTips, PointsBetweenFingers pBf, HandImage handImage) {
+    @Override
+    public Widths get(FingerTips fingerTips, PointsBetweenFingers pBf, HandImage handImage) {
 
         Widths widths = new Widths();
 
@@ -44,14 +46,14 @@ public class HandWidths {
         return widths;
     }
 
-    private static TwoPoints widthPoint(Point A, Point B, List<Point> sub,PointsBetweenFingers pBf) {
+    private TwoPoints widthPoint(Point A, Point B, List<Point> sub,PointsBetweenFingers pBf) {
         Point p1 = HandHelper.parallelPoint(A, B, sub,new IncreaseIndex(),pBf);
         Point p2 = HandHelper.parallelPoint(A, B, sub,new ReduceIndex(),pBf);
 
         return new TwoPoints(p1,p2,HandHelper.distance(p1,p2));
     }
 
-    private static List<Point> fingerPartPoints(FingerTips fingerTips, PointsBetweenFingers
+    private List<Point> fingerPartPoints(FingerTips fingerTips, PointsBetweenFingers
             pointsBetweenFingers, List<Point> sup) {
 
         List<Point> result = new ArrayList<>();

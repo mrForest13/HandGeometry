@@ -9,6 +9,7 @@ import uj.edu.handgeometry.functional.IncreaseIndex;
 import uj.edu.handgeometry.functional.IndexChange;
 import uj.edu.handgeometry.functional.ReduceIndex;
 import uj.edu.handgeometry.image.helper.HandHelper;
+import uj.edu.handgeometry.initialization.DefectsInitialization;
 import uj.edu.handgeometry.model.FingerTips;
 import uj.edu.handgeometry.model.PointsBetweenFingers;
 
@@ -19,9 +20,10 @@ import java.util.stream.Collectors;
 /**
  * Created by mateusz ligeza on 21.04.2017.
  */
-public class ConvexityDefects {
+public class ConvexityDefects implements DefectsInitialization{
 
-    public static PointsBetweenFingers get(FingerTips fingerTips, HandImage handImage) {
+    @Override
+    public PointsBetweenFingers get(FingerTips fingerTips, HandImage handImage) {
 
         PointsBetweenFingers pointsBetweenFingers = new PointsBetweenFingers();
 
@@ -95,7 +97,7 @@ public class ConvexityDefects {
 
     }
 
-    private static Point getExternalPoint(Point start, Point middle, List<Point> points, IndexChange sup) {
+    private Point getExternalPoint(Point start, Point middle, List<Point> points, IndexChange sup) {
 
         Double distance = HandHelper.distance(start, middle);
         Double d;

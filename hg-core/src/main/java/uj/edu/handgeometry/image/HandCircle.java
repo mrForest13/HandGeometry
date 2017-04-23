@@ -2,6 +2,7 @@ package uj.edu.handgeometry.image;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
+import uj.edu.handgeometry.initialization.CircleInitialization;
 import uj.edu.handgeometry.model.MaxCircle;
 
 import java.util.ArrayList;
@@ -12,9 +13,10 @@ import java.util.stream.Collectors;
 /**
  * Created by mateusz ligeza on 11.03.2017.
  */
-public class HandCircle {
+public class HandCircle implements CircleInitialization {
 
-    public static MaxCircle get(HandImage handImage) {
+    @Override
+    public MaxCircle get(HandImage handImage) {
 
         int row = handImage.getRows();
         int col = handImage.getCols();
@@ -41,7 +43,7 @@ public class HandCircle {
     }
 
 
-    private static MaxCircle getMax(Mat transform) {
+    private MaxCircle getMax(Mat transform) {
 
         double max = 0;
         double x = 0, y = 0;

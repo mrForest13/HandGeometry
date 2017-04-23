@@ -11,8 +11,7 @@ import java.util.Properties;
  */
 public class LoadXml {
 
-    //docloweo zmienna srodoiwskowa
-    public final static String XML_PATH = "C:\\Users\\zaloguj\\IdeaProjects\\handgeometry";
+    public final static String XML_PATH = System.getenv("HG_ROOT");
 
     public static String get() {
         Properties prop = new Properties();

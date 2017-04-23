@@ -7,8 +7,6 @@ import uj.edu.handgeometry.exception.FingerException;
  */
 public interface Geometry {
 
-    public void init() throws FingerException;
-
     public Double getLittleLenght();
     public Double getThumbLenght();
     public Double getRingLenght();

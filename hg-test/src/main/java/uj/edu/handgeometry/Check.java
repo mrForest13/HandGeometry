@@ -1,3 +1,5 @@
+package uj.edu.handgeometry;
+
 import org.opencv.core.Core;
 import uj.edu.handgeometry.check.CheckGeometry;
 import uj.edu.handgeometry.check.data.DataBase;
@@ -16,6 +18,6 @@ public class Check {
 
         CheckGeometry check = new DataBase();
 
-        System.out.print(check.checkAll(2)*100+"%");
+        System.out.print(check.checkAll(5)*100+"%");
     }
 }

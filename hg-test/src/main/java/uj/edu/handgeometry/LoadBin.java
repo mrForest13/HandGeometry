@@ -1,3 +1,5 @@
+package uj.edu.handgeometry;
+
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
@@ -29,8 +31,6 @@ public class LoadBin {
 
 
             Mat dst = mRgba.clone();
-
-            System.out.println("start");
 
             Core.inRange(mRgba, new Scalar(0, 0, 55), new Scalar(255, 255, 255), dst);
 

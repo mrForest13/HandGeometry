@@ -1,3 +1,5 @@
+package uj.edu.handgeometry;
+
 import org.opencv.core.Core;
 import uj.edu.handgeometry.exception.FingerException;
 import uj.edu.handgeometry.load.LoadGeometry;

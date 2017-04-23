@@ -22,10 +22,10 @@
 
         <property name="locations">
             <list>
-                <value>file:C:\Users\zaloguj\IdeaProjects\handgeometry\hg-config\database.properties</value>
-                <value>file:C:\Users\zaloguj\IdeaProjects\handgeometry\hg-config\jpa.properties</value>
-                <value>file:C:\Users\zaloguj\IdeaProjects\handgeometry\hg-config\scheme.properties</value>
-                <value>file:C:\Users\zaloguj\IdeaProjects\handgeometry\hg-config\test.properties</value>
+                <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\database.properties</value>
+                <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\jpa.properties</value>
+                <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\scheme.properties</value>
+                <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\test.properties</value>
             </list>
         </property>
     </bean>
