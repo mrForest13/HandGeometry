@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class DataBase implements CheckGeometry {
 
-    protected final static Logger logger = Logger.getLogger(DataBase.class);
+    protected final static Logger logger = Logger.getLogger(CheckGeometry.class);
 
     @Override
     public double checkAll(int numberToCheck) {
@@ -29,7 +29,7 @@ public class DataBase implements CheckGeometry {
         logger.info("Vectors to check size: " + listToCheck.size());
 
         SVN svn = new HgNonLinearSvn(listToLoad);
-        svn.train();
+        svn.load(numberToCheck);
 
         List<SvnVector> result = listToCheck.stream().filter(e -> e.getLabel()==svn.predict(e)).collect(Collectors.toList());
 

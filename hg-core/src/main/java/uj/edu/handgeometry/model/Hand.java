@@ -173,6 +173,9 @@ public class Hand implements Geometry {
 
     @Override
     public void draw(String name) {
+
+        if(!HgProperties.HG_DRAW) return;
+
         Mat mat = Highgui.imread(HgProperties.DATA_DIRECTORY + File.separator + name);
 
         getModels().forEach(m -> m.draw(mat));

@@ -54,21 +54,24 @@ public abstract class SVN {
         return (int) result;
     }
 
-    public void save() {
-        logger.info("Save new classifier in " + HgProperties.HG_CLASSIFIER);
-        cvSVM.save(HgProperties.HG_CLASSIFIER);
+    public void save(int number) {
+        logger.info("Save new classifier in " + makePath(number));
+        cvSVM.save(makePath(number));
     }
 
+    private String makePath(int number) {
+        return HgProperties.HG_CLASSIFIER+number+".xml";
+    }
 
-    public void load() {
-        File f = new File(HgProperties.HG_CLASSIFIER);
+    public void load(int number) {
+        File f = new File(makePath(number));
         if(f.exists()) {
-            logger.info("Load classifier from: " + HgProperties.HG_CLASSIFIER);
-            cvSVM.load(HgProperties.HG_CLASSIFIER);
+            logger.info("Load classifier from: " + makePath(number));
+            cvSVM.load(makePath(number));
         } else {
             logger.info("train new classifier");
             train();
-            save();
+            save(number);
         }
     }
 }
