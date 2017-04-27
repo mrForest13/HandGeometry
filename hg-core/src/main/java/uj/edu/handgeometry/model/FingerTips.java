@@ -1,16 +1,21 @@
 package uj.edu.handgeometry.model;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import uj.edu.handgeometry.image.helper.Finger;
+import uj.edu.handgeometry.model.draw.DrawImage;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static uj.edu.handgeometry.model.draw.DrawProperties.*;
+
 /**
  * Created by mateusz ligeza on 11.03.2017.
  */
-public class FingerTips {
+public class FingerTips implements DrawImage {
 
     private Point thumb;
     private Point indexFinger;
@@ -19,14 +24,6 @@ public class FingerTips {
     private Point littleFinger;
 
     public FingerTips() {}
-
-    public FingerTips(Point thumb, Point indexFinger, Point middleFinger, Point ringFinger, Point littleFinger) {
-        this.thumb = thumb;
-        this.indexFinger = indexFinger;
-        this.middleFinger = middleFinger;
-        this.ringFinger = ringFinger;
-        this.littleFinger = littleFinger;
-    }
 
     public Optional<Finger> contain(Point p) {
 
@@ -83,4 +80,8 @@ public class FingerTips {
         this.littleFinger = littleFinger;
     }
 
+    @Override
+    public void draw(Mat mat) {
+        getFingers().forEach(p ->  Core.circle(mat, p, getRadius(), getBlue()));
+    }
 }

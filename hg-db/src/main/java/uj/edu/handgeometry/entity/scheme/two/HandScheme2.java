@@ -2,8 +2,7 @@ package uj.edu.handgeometry.entity.scheme.two;
 
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
-import uj.edu.handgeometry.entity.scheme.user.HgUser;
-import uj.edu.handgeometry.image.helper.HandHelper;
+import uj.edu.handgeometry.entity.scheme.Scheme;
 
 import javax.persistence.*;
 
@@ -11,11 +10,7 @@ import javax.persistence.*;
  * Created by mateusz ligeza on 16.04.2017.
  */
 @Entity
-public class HandScheme2 implements SvnVector {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class HandScheme2 extends Scheme implements SvnVector {
 
     private Double thumbWidthTop;
     private Double thumbWidthBot;
@@ -33,15 +28,10 @@ public class HandScheme2 implements SvnVector {
     private Double indexLenght;
     private Double middleLenght;
     private Double littleLenght;
+    private Double radius;
 
-
-    private int photoNumber;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private HgUser user;
-
-    public HandScheme2() {}
+    public HandScheme2() {
+    }
 
     public HandScheme2(Geometry g) {
         thumbWidthTop = g.getThumbWidthTop();
@@ -60,14 +50,15 @@ public class HandScheme2 implements SvnVector {
         indexLenght = g.getIndexLenght();
         middleLenght = g.getMiddleLenght();
         littleLenght = g.getLittleLenght();
+        radius = g.getRadius();
     }
 
+    public Double getRadius() {
+        return radius;
+    }
 
-    private double mean(Geometry g) {
-        return (g.getThumbWidthTop()+g.getThumbWidthBot()+g.getIndexWidthTop()+g.getIndexWidthBot()+
-                g.getMiddleWidthTop()+g.getMiddleWidthBot()+g.getRingWidthTop()+g.getRingWidthBot()+
-                g.getLittleWidthTop()+g.getLittleWidthBot()+g.getPalmWidth()+g.getThumbLenght()+
-                g.getRingLenght()+g.getIndexLenght()+g.getMiddleLenght()+g.getLittleLenght())/16;
+    public void setRadius(Double radius) {
+        this.radius = radius;
     }
 
     public Double getThumbWidthTop() {
@@ -198,22 +189,6 @@ public class HandScheme2 implements SvnVector {
         this.littleLenght = littleLenght;
     }
 
-    public int getPhotoNumber() {
-        return photoNumber;
-    }
-
-    public void setPhotoNumber(int photoNumber) {
-        this.photoNumber = photoNumber;
-    }
-
-    public HgUser getUser() {
-        return user;
-    }
-
-    public void setUser(HgUser user) {
-        this.user = user;
-    }
-
     @Override
     public double[] getVector() {
         return new double[]{
@@ -232,17 +207,18 @@ public class HandScheme2 implements SvnVector {
                 ringLenght,
                 indexLenght,
                 middleLenght,
-                littleLenght
+                littleLenght,
+                radius
         };
     }
 
     @Override
     public int getLabel() {
-        return user.getUserNumber();
+        return getUser().getUserNumber();
     }
 
     @Override
     public int getNumber() {
-        return photoNumber;
+        return getPhotoNumber();
     }
 }

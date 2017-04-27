@@ -3,9 +3,8 @@ package uj.edu.handgeometry.image.helper;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 
-import java.util.List;
+import static uj.edu.handgeometry.model.draw.DrawProperties.getBlue;
 
 /**
  * Created by mateusz ligeza on 17.03.2017.
@@ -89,6 +88,6 @@ public class TwoPoints implements Comparable<TwoPoints> {
     }
 
     public void draw(Mat mat) {
-        Core.line(mat,p1,p2,new Scalar(255, 0, 0));
+        Core.line(mat,p1,p2,getBlue());
     }
 }

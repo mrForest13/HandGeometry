@@ -6,6 +6,7 @@ import uj.edu.handgeometry.image.helper.HandHelper;
 import uj.edu.handgeometry.image.helper.TwoPoints;
 import uj.edu.handgeometry.initialization.FingersInitialization;
 import uj.edu.handgeometry.model.FingerTips;
+import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.MaxCircle;
 
 import java.util.*;
@@ -19,16 +20,20 @@ public class HandFingers implements FingersInitialization {
     @Override
     public FingerTips get(HandImage handImage, MaxCircle maxCircle) throws FingerException {
 
-        List<Point> points = getFingerPoints(handImage, maxCircle);
+        List<Point> points = getFingerPoints(handImage, maxCircle,1.7);
 
-        if (points.size() < 5) throw new FingerException();
+        if (points.size() < 5) {
+            points = getFingerPoints(handImage, maxCircle,1.5);
+
+            if (points.size() < 5) throw new FingerException();
+        }
 
         if(points.size()>5) points = getFive(points);
 
         return loadFingerTipsPoint(points, maxCircle);
     }
 
-    private List<Point> getFingerPoints(HandImage handImage, MaxCircle maxCircle) {
+    private List<Point> getFingerPoints(HandImage handImage, MaxCircle maxCircle, double range) {
 
         ArrayList<Point> fingersPoint = new ArrayList<Point>();
 
@@ -41,7 +46,7 @@ public class HandFingers implements FingersInitialization {
 
         for (Map.Entry<Point, Double> entry : map.entrySet()) {
 
-            if (entry.getValue() > maxCircle.getRadius() * 1.7) {
+            if (entry.getValue() > maxCircle.getRadius() * range) {
 
                 if (first == 0) {
                     ifFirstInRange = true;
@@ -62,7 +67,8 @@ public class HandFingers implements FingersInitialization {
         if (ifFirstInRange) {
             Point maxPoint = points.entrySet().stream().max((entry1, entry2) ->
                     entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
-            if (HandHelper.distance(fingersPoint.get(0), maxCircle.getCenter()) < HandHelper.distance(maxPoint, maxCircle.getCenter()))
+            if (HandHelper.distance(fingersPoint.get(0), maxCircle.getCenter()) <
+                    HandHelper.distance(maxPoint, maxCircle.getCenter()))
                 fingersPoint.set(0, maxPoint);
         }
 
@@ -116,13 +122,7 @@ public class HandFingers implements FingersInitialization {
 
     private List<Point> getFive(List<Point> points) {
 
-        Collections.sort(points, new Comparator<Point>() {
-
-                public int compare(Point o1, Point o2) {
-
-                    return o1.y > o2.y ? 1 : (o1.y < o2.y ? -1 : 0);
-                }
-        });
+        Collections.sort(points, (o1, o2) -> o1.y > o2.y ? 1 : (o1.y < o2.y ? -1 : 0));
 
         return points.subList(0,5);
     }

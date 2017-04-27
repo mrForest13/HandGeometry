@@ -1,11 +1,16 @@
 package uj.edu.handgeometry.model;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import uj.edu.handgeometry.model.draw.DrawImage;
+
+import static uj.edu.handgeometry.model.draw.DrawProperties.getBlue;
 
 /**
  * Created by zaloguj on 11.03.2017.
  */
-public class MaxCircle {
+public class MaxCircle implements DrawImage {
 
     private Point center;
     private Double radius;
@@ -29,5 +34,10 @@ public class MaxCircle {
 
     public void setRadius(Double radius) {
         this.radius = radius;
+    }
+
+    @Override
+    public void draw(Mat mat) {
+        Core.circle(mat, center, new Double(radius).intValue(), getBlue());
     }
 }

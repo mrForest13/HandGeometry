@@ -11,11 +11,11 @@ import uj.edu.handgeometry.functional.ReduceIndex;
 import uj.edu.handgeometry.image.helper.HandHelper;
 import uj.edu.handgeometry.initialization.DefectsInitialization;
 import uj.edu.handgeometry.model.FingerTips;
+import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.PointsBetweenFingers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by mateusz ligeza on 21.04.2017.

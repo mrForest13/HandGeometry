@@ -3,6 +3,7 @@ package uj.edu.handgeometry.image;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
+import uj.edu.handgeometry.model.HandImage;
 
 import java.util.ArrayList;
 import java.util.Collections;

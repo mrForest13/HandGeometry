@@ -7,6 +7,7 @@ import uj.edu.handgeometry.image.helper.HandHelper;
 import uj.edu.handgeometry.image.helper.TwoPoints;
 import uj.edu.handgeometry.initialization.WidthsInitialization;
 import uj.edu.handgeometry.model.FingerTips;
+import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.PointsBetweenFingers;
 import uj.edu.handgeometry.model.Widths;
 
@@ -57,7 +58,7 @@ public class HandWidths implements WidthsInitialization {
             pointsBetweenFingers, List<Point> sup) {
 
         List<Point> result = new ArrayList<>();
-        List<Point> l = pointsBetweenFingers.getPoints();
+        List<Point> l = pointsBetweenFingers.getCenters();
         int i = 0;
 
         for(Point f : fingerTips.getFingers()) {

@@ -3,6 +3,7 @@ package uj.edu.handgeometry.image;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import uj.edu.handgeometry.initialization.CircleInitialization;
+import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.MaxCircle;
 
 import java.util.ArrayList;

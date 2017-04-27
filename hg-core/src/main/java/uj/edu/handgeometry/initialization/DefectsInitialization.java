@@ -1,6 +1,6 @@
 package uj.edu.handgeometry.initialization;
 
-import uj.edu.handgeometry.image.HandImage;
+import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.FingerTips;
 import uj.edu.handgeometry.model.PointsBetweenFingers;
 

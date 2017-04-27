@@ -9,6 +9,7 @@ import uj.edu.handgeometry.file.FileReader;
 import uj.edu.handgeometry.image.*;
 import uj.edu.handgeometry.load.LoadGeometry;
 import uj.edu.handgeometry.model.Hand;
+import uj.edu.handgeometry.model.HandImage;
 
 import java.io.File;
 import java.util.List;
@@ -24,9 +25,11 @@ public class BinaryImage extends LoadGeometry {
         Geometry hand = new Hand(handImage,new HandCircle(),new HandFingers(),
                 new ConvexityDefects(),new HandWidths());
 
-        hand.draw(path.replaceAll("bin", "wynik"), path);
-
         String userName = getUserNumber(path);
+
+        int pn = path.length();
+
+        hand.draw(path.substring(pn-9,pn));
 
         HgUser hgUser = ApplicationContextHolder.getDbService().findByName(Integer.parseInt(userName));
 

@@ -1,15 +1,22 @@
 package uj.edu.handgeometry.model;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import uj.edu.handgeometry.image.helper.HandHelper;
+import uj.edu.handgeometry.image.helper.TwoPoints;
+import uj.edu.handgeometry.model.draw.DrawImage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static uj.edu.handgeometry.model.draw.DrawProperties.*;
 
 /**
  * Created by zaloguj on 25.03.2017.
  */
-public class PointsBetweenFingers {
+public class PointsBetweenFingers implements DrawImage {
 
     private Point littleRing;
     private Point ringMiddle;
@@ -27,7 +34,7 @@ public class PointsBetweenFingers {
         this.thumbExternal = thumbExternal;
     }
 
-    public List<Point> getPoints() {
+    public List<Point> getCenters() {
 
         List<Point> result = new ArrayList<>();
 
@@ -49,6 +56,19 @@ public class PointsBetweenFingers {
         if(p.equals(littleExternal)) return true;
         if(p.equals(indexExternal)) return true;
         return false;
+    }
+
+    public List<Point> getPoints() {
+        return Arrays.asList(littleRing,ringMiddle,indexMiddle,
+                thumbIndex,thumbExternal,littleExternal,indexExternal);
+    }
+
+    private List<TwoPoints> getLine() {
+        return Arrays.asList(new TwoPoints(thumbExternal,thumbIndex),
+                new TwoPoints(indexExternal,indexMiddle),
+                new TwoPoints(indexMiddle,ringMiddle),
+                new TwoPoints(ringMiddle,littleRing),
+                new TwoPoints(littleRing,littleExternal));
     }
 
     public Point getLittleExternal() {
@@ -97,5 +117,11 @@ public class PointsBetweenFingers {
 
     public void setThumbIndex(Point thumbIndex) {
         this.thumbIndex = thumbIndex;
+    }
+
+    @Override
+    public void draw(Mat mat) {
+        getPoints().forEach(p ->  Core.circle(mat, p,getRadius(), getBlue()));
+        getLine().forEach(l -> l.draw(mat));
     }
 }

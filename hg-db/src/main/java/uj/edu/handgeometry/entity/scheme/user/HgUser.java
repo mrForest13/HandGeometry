@@ -1,8 +1,7 @@
 package uj.edu.handgeometry.entity.scheme.user;
 
 import uj.edu.handgeometry.classifier.vector.SvnVector;
-import uj.edu.handgeometry.entity.scheme.one.HandScheme1;
-import uj.edu.handgeometry.entity.scheme.two.HandScheme2;
+import uj.edu.handgeometry.entity.scheme.Scheme;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +18,7 @@ public class HgUser {
 
     private Integer userNumber;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user",targetEntity = HandScheme2.class)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user",targetEntity = Scheme.class)
     private List<SvnVector> geometry;
 
     public HgUser() {}

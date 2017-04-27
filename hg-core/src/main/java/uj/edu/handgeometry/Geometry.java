@@ -25,6 +25,6 @@ public interface Geometry {
     public Double  getLittleWidthBot();
     public Double getPalmWidth();
 
-    public void draw(String filePath,String origin);
+    public void draw(String name);
 
 }

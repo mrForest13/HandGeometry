@@ -2,7 +2,7 @@ package uj.edu.handgeometry.entity.scheme.one;
 
 import uj.edu.handgeometry.Geometry;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
-import uj.edu.handgeometry.entity.scheme.user.HgUser;
+import uj.edu.handgeometry.entity.scheme.Scheme;
 
 import javax.persistence.*;
 
@@ -10,11 +10,7 @@ import javax.persistence.*;
  * Created by mateusz ligeza on 02.04.2017.
  */
 @Entity
-public class HandScheme1 implements SvnVector {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class HandScheme1 extends Scheme implements SvnVector {
 
     private double indexRing;
     private double indexLittle;
@@ -31,13 +27,6 @@ public class HandScheme1 implements SvnVector {
     private double middleRadius;
     private double littleRadius;
     private double ringRadius;
-
-    private int photoNumber;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private HgUser user;
-
 
     public HandScheme1(Geometry g) {
         indexRing = g.getIndexLenght() / g.getRingLenght();
@@ -58,20 +47,6 @@ public class HandScheme1 implements SvnVector {
     }
 
     public HandScheme1() {
-    }
-
-    public void setPhotoNumber(int number) {
-        this.photoNumber = number;
-    }
-
-    public int getPhotoNumber() { return photoNumber; }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public double getIndexRing() {
@@ -194,36 +169,6 @@ public class HandScheme1 implements SvnVector {
         this.ringRadius = ringRadius;
     }
 
-    public HgUser getUser() {
-        return user;
-    }
-
-    public void setUser(HgUser user) {
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "HandScheme1{" +
-                "id=" + id +
-                ", indexRing=" + indexRing +
-                ", indexLittle=" + indexLittle +
-                ", indexMiddle=" + indexMiddle +
-                ", indexThumb=" + indexThumb +
-                ", ringMiddle=" + ringMiddle +
-                ", ringLittle=" + ringLittle +
-                ", ringThumb=" + ringThumb +
-                ", middleLittle=" + middleLittle +
-                ", middleThumb=" + middleThumb +
-                ", littleThumb=" + littleThumb +
-                ", indexRadius=" + indexRadius +
-                ", thumbRadius=" + thumbRadius +
-                ", middleRadius=" + middleRadius +
-                ", littleRadius=" + littleRadius +
-                ", ringRadius=" + ringRadius +
-                '}';
-    }
-
     @Override
     public double[] getVector() {
         return new double[]{
@@ -247,7 +192,7 @@ public class HandScheme1 implements SvnVector {
 
     @Override
     public int getLabel() {
-        return user.getUserNumber();
+        return getUser().getUserNumber();
     }
 
     @Override

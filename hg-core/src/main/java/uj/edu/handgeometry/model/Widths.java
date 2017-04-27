@@ -1,12 +1,17 @@
 package uj.edu.handgeometry.model;
 
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import uj.edu.handgeometry.image.helper.TwoPoints;
+import uj.edu.handgeometry.model.draw.DrawImage;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by mateusz ligeza on 16.04.2017.
  */
-public class Widths {
+public class Widths implements DrawImage {
 
     private TwoPoints thumbWidthTop;
     private TwoPoints thumbWidthBot;
@@ -18,6 +23,11 @@ public class Widths {
     private TwoPoints ringWidthBot;
     private TwoPoints littleWidthTop;
     private TwoPoints littleWidthBot;
+
+    public List<TwoPoints> getWidths() {
+        return Arrays.asList(thumbWidthTop,thumbWidthBot,indexWidthTop,indexWidthBot,middleWidthTop,
+                middleWidthBot,ringWidthTop,ringWidthBot,littleWidthTop,littleWidthBot);
+    }
 
     public TwoPoints getThumbWidthTop() {
         return thumbWidthTop;
@@ -97,5 +107,10 @@ public class Widths {
 
     public void setLittleWidthBot(TwoPoints littleWidthBot) {
         this.littleWidthBot = littleWidthBot;
+    }
+
+    @Override
+    public void draw(Mat mat) {
+        getWidths().forEach(w -> w.draw(mat));
     }
 }

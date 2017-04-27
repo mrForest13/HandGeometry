@@ -5,13 +5,11 @@ import org.apache.log4j.Logger;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.ml.CvSVM;
-import uj.edu.handgeometry.classifier.properties.LoadXml;
+import uj.edu.handgeometry.classifier.properties.HgProperties;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
-import java.util.logging.XMLFormatter;
 
 /**
  * Created by mateusz ligeza on 16.04.2017.
@@ -57,16 +55,16 @@ public abstract class SVN {
     }
 
     public void save() {
-        logger.info("Save new classifier in " + LoadXml.get());
-        cvSVM.save(LoadXml.get());
+        logger.info("Save new classifier in " + HgProperties.HG_CLASSIFIER);
+        cvSVM.save(HgProperties.HG_CLASSIFIER);
     }
 
 
     public void load() {
-        File f = new File(LoadXml.get());
+        File f = new File(HgProperties.HG_CLASSIFIER);
         if(f.exists()) {
-            logger.info("Load classifier from: " + LoadXml.get());
-            cvSVM.load(LoadXml.get());
+            logger.info("Load classifier from: " + HgProperties.HG_CLASSIFIER);
+            cvSVM.load(HgProperties.HG_CLASSIFIER);
         } else {
             logger.info("train new classifier");
             train();
