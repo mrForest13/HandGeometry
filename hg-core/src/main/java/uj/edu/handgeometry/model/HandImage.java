@@ -47,6 +47,6 @@ public class HandImage implements DrawImage {
         List<MatOfPoint> countour = new ArrayList<MatOfPoint>();
         countour.add(matOfPoint);
 
-        Imgproc.drawContours(mat, countour, 0, getBlue(), 1);
+        Imgproc.drawContours(mat, countour, 0, getBlue(), 2);
     }
 }

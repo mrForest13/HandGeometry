@@ -29,7 +29,6 @@ public class HandHelper {
         return pointsDistance;
     }
 
-
     public static List<TwoPoints> getDistanceAndAngle(List<Point> points, MaxCircle maxCircle) {
 
         Point[] pointsArray = points.toArray(new Point[5]);

@@ -5,6 +5,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 
 import static uj.edu.handgeometry.model.draw.DrawProperties.getBlue;
+import static uj.edu.handgeometry.model.draw.DrawProperties.getRadius;
 
 /**
  * Created by mateusz ligeza on 17.03.2017.
@@ -88,6 +89,10 @@ public class TwoPoints implements Comparable<TwoPoints> {
     }
 
     public void draw(Mat mat) {
+
+        Core.circle(mat, this.getP1(), getRadius(), getBlue());
+        Core.circle(mat, this.getP2(), getRadius(), getBlue());
+
         Core.line(mat,p1,p2,getBlue());
     }
 }

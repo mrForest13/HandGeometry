@@ -4,6 +4,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import uj.edu.handgeometry.model.draw.DrawImage;
+import uj.edu.handgeometry.model.draw.DrawProperties;
 
 import static uj.edu.handgeometry.model.draw.DrawProperties.getBlue;
 
@@ -38,6 +39,7 @@ public class MaxCircle implements DrawImage {
 
     @Override
     public void draw(Mat mat) {
+        Core.circle(mat, center, DrawProperties.getRadius(), getBlue());
         Core.circle(mat, center, new Double(radius).intValue(), getBlue());
     }
 }

@@ -7,6 +7,7 @@ import uj.edu.handgeometry.model.HandImage;
 import uj.edu.handgeometry.model.MaxCircle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +32,7 @@ public class HandCircle implements CircleInitialization {
 
         matOfPoint.fromList(list);
 
-        ArrayList<MatOfPoint> point = new ArrayList<MatOfPoint>();
-        point.add(matOfPoint);
-
-        Imgproc.drawContours(transform, point, 0, new Scalar(255, 0, 0),
+        Imgproc.drawContours(transform, Arrays.asList(matOfPoint), 0, new Scalar(255, 0, 0),
                 Core.FILLED);
 
         Imgproc.distanceTransform(transform, transform, Imgproc.CV_DIST_L2,

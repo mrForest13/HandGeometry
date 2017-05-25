@@ -23,7 +23,7 @@ public class LoadBin {
 
         for(String s : files) {
 
-            File file = new File("C:\\Users\\zaloguj\\Desktop\\IITD Palmprint V1\\Right Hand\\"+s+".jpg");
+            File file = new File("C:\\Users\\zaloguj\\Desktop\\IITD Palmprint V1\\user\\"+s+".jpg");
 
             Mat mRgba = Highgui.imread(file.toString());
 

@@ -181,6 +181,6 @@ public class Hand implements Geometry {
         getModels().forEach(m -> m.draw(mat));
         getFingersLines().forEach(fl -> fl.draw(mat));
 
-        Highgui.imwrite(HgProperties.RESULT_DIRECTORY + File.separator + name + ".jpg", mat);
+        Highgui.imwrite(HgProperties.RESULT_DIRECTORY + File.separator + name, mat);
     }
 }

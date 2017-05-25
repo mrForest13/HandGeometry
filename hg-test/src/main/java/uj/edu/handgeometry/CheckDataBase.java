@@ -23,7 +23,10 @@ public class CheckDataBase {
 
         double result = 0;
 
-        for(int i = 1; i<6; i++) result+=check.checkAll(i)*100;
+        for(int i = 1; i<6; i++) {
+            logger.info("Result for "+i+": = "+check.checkAll(i)*100);
+            result+=check.checkAll(i)*100;
+        }
 
         logger.info("Result: " + result/5 +"%");
 

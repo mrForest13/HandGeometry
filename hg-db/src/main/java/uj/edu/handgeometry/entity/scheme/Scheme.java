@@ -1,5 +1,7 @@
 package uj.edu.handgeometry.entity.scheme;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import uj.edu.handgeometry.entity.scheme.user.HgUser;
 
 import javax.persistence.*;
@@ -9,7 +11,12 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Scheme {
+public abstract class Scheme {
+
+    @Autowired
+    @Value("${vector.resize}")
+    @Transient
+    public String resize;
 
     @Id
     @GeneratedValue
@@ -36,5 +43,7 @@ public class Scheme {
     public void setPhotoNumber(int photoNumber) {
         this.photoNumber = photoNumber;
     }
+
+    public abstract double resize();
 
 }

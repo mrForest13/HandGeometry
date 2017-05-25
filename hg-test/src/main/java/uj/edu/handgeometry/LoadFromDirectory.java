@@ -16,7 +16,7 @@ public class LoadFromDirectory {
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        LoadGeometry load = new BinaryImage();
+        BinaryImage load = new BinaryImage();
 
         try {
             load.loadAll();

@@ -1,6 +1,7 @@
 package uj.edu.handgeometry.entity.scheme.two;
 
 import uj.edu.handgeometry.Geometry;
+import uj.edu.handgeometry.classifier.properties.HgProperties;
 import uj.edu.handgeometry.classifier.vector.SvnVector;
 import uj.edu.handgeometry.entity.scheme.Scheme;
 
@@ -28,29 +29,34 @@ public class HandScheme2 extends Scheme implements SvnVector {
     private Double indexLenght;
     private Double middleLenght;
     private Double littleLenght;
+
+    @Transient
     private Double radius;
 
     public HandScheme2() {
     }
 
     public HandScheme2(Geometry g) {
-        thumbWidthTop = g.getThumbWidthTop();
-        thumbWidthBot = g.getThumbWidthBot();
-        indexWidthTop = g.getIndexWidthTop();
-        indexWidthBot = g.getIndexWidthBot();
-        middleWidthTop = g.getMiddleWidthTop();
-        middleWidthBot = g.getMiddleWidthBot();
-        ringWidthTop = g.getRingWidthTop();
-        ringWidthBot = g.getRingWidthBot();
-        littleWidthTop = g.getLittleWidthTop();
-        littleWidthBot = g.getLittleWidthBot();
-        palmWidth = g.getPalmWidth();
-        thumbLenght = g.getThumbLenght();
-        ringLenght = g.getRingLenght();
-        indexLenght = g.getIndexLenght();
-        middleLenght = g.getMiddleLenght();
-        littleLenght = g.getLittleLenght();
         radius = g.getRadius();
+
+        double r = resize();
+
+        thumbWidthTop = g.getThumbWidthTop()*r;
+        thumbWidthBot = g.getThumbWidthBot()*r;
+        indexWidthTop = g.getIndexWidthTop()*r;
+        indexWidthBot = g.getIndexWidthBot()*r;
+        middleWidthTop = g.getMiddleWidthTop()*r;
+        middleWidthBot = g.getMiddleWidthBot()*r;
+        ringWidthTop = g.getRingWidthTop()*r;
+        ringWidthBot = g.getRingWidthBot()*r;
+        littleWidthTop = g.getLittleWidthTop()*r;
+        littleWidthBot = g.getLittleWidthBot()*r;
+        palmWidth = g.getPalmWidth()*r;
+        thumbLenght = g.getThumbLenght()*r;
+        ringLenght = g.getRingLenght()*r;
+        indexLenght = g.getIndexLenght()*r;
+        middleLenght = g.getMiddleLenght()*r;
+        littleLenght = g.getLittleLenght()*r;
     }
 
     public Double getRadius() {
@@ -208,7 +214,6 @@ public class HandScheme2 extends Scheme implements SvnVector {
                 indexLenght,
                 middleLenght,
                 littleLenght,
-                radius
         };
     }
 
@@ -220,5 +225,10 @@ public class HandScheme2 extends Scheme implements SvnVector {
     @Override
     public int getNumber() {
         return getPhotoNumber();
+    }
+
+    @Override
+    public double resize() {
+        return new Boolean(resize) ? 100/radius : 1;
     }
 }

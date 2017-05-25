@@ -26,6 +26,7 @@
                 <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\jpa.properties</value>
                 <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\scheme.properties</value>
                 <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\test.properties</value>
+                <value>file:#{systemEnvironment['HG_ROOT']}\hg-config\vector.properties</value>
             </list>
         </property>
     </bean>

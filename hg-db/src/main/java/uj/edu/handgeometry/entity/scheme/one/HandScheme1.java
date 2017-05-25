@@ -199,4 +199,9 @@ public class HandScheme1 extends Scheme implements SvnVector {
     public int getNumber() {
         return getPhotoNumber();
     }
+
+    @Override
+    public double resize() {
+        return 0;
+    }
 }
